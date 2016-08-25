@@ -4,11 +4,18 @@ require_once "API.php";
 if (isset($_GET["creatmember"]) && isset($_GET["username"]))
 {
     $creat = new APItest();
-    $creat->creatmember($_GET["username"]);
 
-    if($apimodel != 0)
+    $result = $creat->userbalance($_GET["username"]);
+    if($result[0][1] != $_GET["username"])
     {
-        echo "add member successful";
+        $creat->creatmember($_GET["username"]);
+
+        if($creat != 0)
+        {
+            echo "add member successful!";
+        }
+    }else{
+        echo "member repeat";
     }
 }
 
@@ -17,7 +24,6 @@ if (isset($_GET["userbalance"]) && isset($_GET["username"]))
     $getuser = new APItest();
     $userdata = $getuser->userbalance($_GET["username"]);
 
-    // var_dump($userdata);
     if($userdata != 0)
     {
         echo "User: ".$userdata[0][1]."<br>";
@@ -29,11 +35,18 @@ if (isset($_GET["transfer"]) && isset($_GET["username"]) && isset($_GET["type"])
     && isset($_GET["money"]) && isset($_GET["transferId"]))
 {
     $moneyIO = new APItest();
-    $moneyIO->transfer($_GET["username"], $_GET["type"], $_GET["transferId"], $_GET["money"]);
+    $result = $moneyIO->checktransferId($_GET["transferId"]);
 
-    if($moneyIO != 0)
+    if($result[0][2] != $_GET["transferId"])
     {
-        echo "transfer successful";
+        $moneyIO->transfer($_GET["username"], $_GET["type"], $_GET["transferId"], $_GET["money"]);
+
+        if($moneyIO != 0)
+        {
+            echo "transfer successful";
+        }
+    }else{
+        echo "transferId repeat!";
     }
 }
 

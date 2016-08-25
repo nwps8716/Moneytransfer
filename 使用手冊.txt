@@ -1,0 +1,11 @@
+1.建立帳號:
+https://testweb-lid-chen.c9users.io/Moneytransfer/Client.php?creatmember&username=使用者名稱
+
+2.取得餘額:
+https://testweb-lid-chen.c9users.io/Moneytransfer/Client.php?userbalance&username=使用者名稱
+
+3.轉帳:
+https://testweb-lid-chen.c9users.io/Moneytransfer/Client.php?transfer&username=使用者名稱&type=(IN or OUT)&money=轉帳金額&transferId=轉帳序號
+
+4.轉帳確認:
+https://testweb-lid-chen.c9users.io/Moneytransfer/Client.php?checkrecord&username=使用者名稱&transferId=轉帳序號

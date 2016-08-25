@@ -76,6 +76,19 @@ class APItest
 
 	    return $result;
     }
+
+    function checktransferId($transferId)
+    {
+        $sql = "SELECT * FROM `Balance` WHERE `transferId` = :transferId";
+        $stmt = $this->dbcon->prepare($sql);
+        $stmt->bindValue(':transferId', $transferId);
+        $stmt->execute();
+
+        $result = $stmt->fetchAll();
+        $this->dbpdo->closeConnection();
+
+	    return $result;
+    }
 }
 
 ?>
