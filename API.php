@@ -60,6 +60,7 @@ class APItest
         	$stmt->bindValue(':money', $money);
 
         	$result = $stmt->execute();
+            return 1;
         }
     }
 

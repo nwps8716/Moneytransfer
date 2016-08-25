@@ -31,24 +31,32 @@ if (isset($_GET["userbalance"]) && isset($_GET["username"]))
     }
 }
 
-if (isset($_GET["transfer"]) && isset($_GET["username"]) && isset($_GET["type"])
-    && isset($_GET["money"]) && isset($_GET["transferId"]))
+if (isset($_GET["transfer"]))
 {
-    $moneyIO = new APItest();
-    $result = $moneyIO->checktransferId($_GET["transferId"]);
-
-    if($result[0][2] != $_GET["transferId"])
+    if($_GET["username"] == NULL or $_GET["type"] == NULL or $_GET["money"] == NULL or $_GET["transferId"] == NULL)
     {
-        $moneyIO->transfer($_GET["username"], $_GET["type"], $_GET["transferId"], $_GET["money"]);
+        echo "參數不足";
+        exit;
+    }
+    else
+    {
+        $moneyIO = new APItest();
+        $result = $moneyIO->checktransferId($_GET["transferId"]);
 
-        if($moneyIO != 0)
+        if($result[0][2] != $_GET["transferId"])
         {
-            echo "transfer successful";
+            $result = $moneyIO->transfer($_GET["username"], $_GET["type"], $_GET["transferId"], $_GET["money"]);
+
+            if($result)
+            {
+                echo "transfer successful";
+            }
+        }else{
+            echo "transferId repeat!";
         }
-    }else{
-        echo "transferId repeat!";
     }
 }
+
 
 if (isset($_GET["checkrecord"]) && isset($_GET["username"]) && isset($_GET["transferId"]))
 {
